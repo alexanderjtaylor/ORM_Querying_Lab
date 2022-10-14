@@ -254,8 +254,8 @@ SELECT COUNT(*) AS `__count`
 # NOTE every time you execute this function a duplicate student will be created with a different primary key number
 def problem_five(request):
   
-    new_student = Student.objects.create(pk = 11, first_name = "Alex", last_name = "Taylor", year = 2022, gpa = 4.0)
-    print(new_student.first_name, new_student.last_name, new_student.year, new_student.gpa)
+    new_student = Student.objects.create(first_name = "Alex", last_name = "Taylor", year = 2022, gpa = 4.0)
+    print(new_student.pk, new_student.first_name, new_student.last_name, new_student.year, new_student.gpa)
 
     return complete(request)
 
@@ -290,9 +290,9 @@ VALUES ('Kyle', 'Harwood', 2022, 3.0)
 def problem_six(request):
 
     # Make sure to set this equal to the primary key of the row you just created!
-    student_id = 11
-    new_gpa = Student.objects.get(pk=11).update(gpa = 3.5)
-    new_student_query = Student.objects.get(pk=11)
+    student_id = 14
+    new_gpa = Student.objects.filter(pk=14).update(gpa = 3.5)
+    new_student_query = Student.objects.get(pk=14)
     print(new_student_query.pk, new_student_query.first_name, new_student_query.last_name, new_student_query.gpa)
     
 
@@ -341,12 +341,13 @@ LIMIT 21
 def problem_seven(request):
 
     # Make sure to set this equal to the primary key of the row you just created!
-    student_id = 11
+    student_id = 14
     
-    Student.objects.get(pk=11).delete
+    Student.objects.filter(pk=14).delete()
 
     try:
-        student = Student.objects.get(pk=student_id)
+        student = Student.objects.get(pk=14)
+        print(f"{student.first_name} {student.last_name}")
     except ObjectDoesNotExist:
         print('Great! It failed and couldnt find the object because we deleted it!')
 
